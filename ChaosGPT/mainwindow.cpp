@@ -3,6 +3,7 @@
 #include <QNetworkRequest>
 #include <QJsonDocument>
 #include <QDebug>
+#define APIKey sk-OLmiedlzjRH2bGPQ4TOC0wXvt49qVgWEuifEbjAUzU6SZgCL
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -11,6 +12,12 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // 读取 API 密钥
+    apiKey = readApiKeyFromConfig();
+    if (apiKey.isEmpty()) {
+        qWarning() << "API Key not found!";
+    }
+    qDebug()<<"APIKey="<<apiKey;
     manager = new QNetworkAccessManager(this);  // 初始化网络管理器
     connect(manager, &QNetworkAccessManager::finished, this, &MainWindow::onFinished);  // 连接请求完成信号
     MainWindow::setupRequest();
@@ -47,7 +54,8 @@ void MainWindow::setupRequest()
     // 设置请求 URL 和请求头（这些通常是固定的）
     request.setUrl(QUrl("https://api.hunyuan.cloud.tencent.com/v1/chat/completions"));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    request.setRawHeader("Authorization", "Bearer sk-OLmiedlzjRH2bGPQ4TOC0wXvt49qVgWEuifEbjAUzU6SZgCL");  // 替换为你的 API 密钥
+    request.setRawHeader("Authorization", "Bearer " + apiKey.toUtf8());  // 使用读取的 API 密钥
+
 
     // 设置固定的 JSON 请求体部分（不变的部分）
     fixedJson["model"] = "hunyuan-turbo";
@@ -106,4 +114,11 @@ void MainWindow::handleResponse(QNetworkReply *reply)
     }
 
     reply->deleteLater();  // 清理 reply 对象
+}
+
+QString MainWindow::readApiKeyFromConfig()
+{
+    QString configPath = QCoreApplication::applicationDirPath() + "/config.ini";
+    QSettings settings(configPath, QSettings::IniFormat);
+    return settings.value("API/key").toString();
 }

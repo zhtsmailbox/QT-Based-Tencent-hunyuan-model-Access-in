@@ -8,6 +8,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QSettings>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -35,9 +36,12 @@ private:
     QJsonObject fixedJson;
 
     QJsonObject createRequestBody(const QString &prompt);
+    QString readApiKeyFromConfig();  // 读取配置文件中的API密钥
 
     void setupRequest();
 
     void handleResponse(QNetworkReply *reply);
+
+    QString apiKey;
 };
 #endif // MAINWINDOW_H
