@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>729</width>
+    <height>582</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="6" column="0">
+     <widget class="QTextEdit" name="input">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>100</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QPushButton" name="sendMsg">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Send</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="2">
+     <widget class="QTextEdit" name="output"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>729</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuGPT">
+    <property name="title">
+     <string>GPT</string>
+    </property>
+    <addaction name="actionNew_Contect"/>
+   </widget>
+   <widget class="QMenu" name="menuChange_source">
+    <property name="title">
+     <string>Change source</string>
+    </property>
+    <addaction name="actionChatGPT"/>
+    <addaction name="actionDeepseek"/>
+    <addaction name="actionChasoGPT"/>
+    <addaction name="actionOther"/>
+   </widget>
+   <addaction name="menuGPT"/>
+   <addaction name="menuChange_source"/>
+  </widget>
+  <action name="actionChatGPT">
+   <property name="text">
+    <string>ChatGPT</string>
+   </property>
+  </action>
+  <action name="actionDeepseek">
+   <property name="text">
+    <string>Deepseek</string>
+   </property>
+  </action>
+  <action name="actionChasoGPT">
+   <property name="text">
+    <string>ChasoGPT</string>
+   </property>
+  </action>
+  <action name="actionOther">
+   <property name="text">
+    <string>Other</string>
+   </property>
+  </action>
+  <action name="actionNew_Contect">
+   <property name="text">
+    <string>New Contect</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
